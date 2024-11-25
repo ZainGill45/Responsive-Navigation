@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      header {
+        min-height: 100vh;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 1rem;
+      }
+
+      nav .logo {
+        width: 64px;
+        height: 64px;
+        background-color: black;
+      }
+
+      nav #hamburger-menu {
+        display: none;
+        cursor: pointer;
+      }
+
+      nav #navigation-links {
+        list-style: none;
+        margin: 0;
+        transition: all ease;
+      }
+
+      nav #navigation-links li {
+        display: inline;
+        padding: 2rem;
+      }
+
+      @media screen and (max-width: 53.4375rem) {
+        nav {
+          justify-content: space-between;
+          padding-inline: 1rem;
+        }
+        nav #hamburger-menu {
+          display: block;
+        }
+        nav #navigation-links {
+          position: absolute;
+          width: 60%;
+          height: 100%;
+          background-color: skyblue;
+          top: 0;
+          left: -100%; /* Initially off-screen */
+          transition: left 0.5s ease;
+        }
+
+        nav #navigation-links.active {
+          left: 0; /* Slide into view */
+        }
+        nav #navigation-links li {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo"></div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="32px"
+          viewBox="0 -960 960 960"
+          width="32px"
+          fill="#222222"
+          id="hamburger-menu"
+        >
+          <path
+            d="M140-254.62v-50.25h680v50.25H140Zm0-200.25v-50.26h680v50.26H140Zm0-200.26v-50.25h680v50.25H140Z"
+          />
+        </svg>
+        <ul id="navigation-links">
+          <li>Home</li>
+          <li>Events</li>
+          <li>Reservations</li>
+          <li>Contact Us</li>
+          <li>Login</li>
+        </ul>
+      </nav>
+    </header>
+
+    <script>
+      const hamburgerMenu = document.getElementById("hamburger-menu");
+      const navigationLinks = document.getElementById("navigation-links");
+
+      hamburgerMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+        navigationLinks.classList.toggle("active");
+      });
+
+      document.addEventListener("click", (event) => {
+        if (
+          !navigationLinks.contains(event.target) &&
+          !hamburgerMenu.contains(event.target)
+        ) {
+          navigationLinks.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>
